@@ -1,7 +1,9 @@
 import * as React from "react";
 // import "./Navigator.css";
 import { MODES, Mode } from "../types";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
 import { compact } from "lodash";
 
 interface IProps {
@@ -29,10 +31,10 @@ export const Navigator: React.FC<IProps> = ({ currentMode, setMode }) => {
     );
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar expand="sm" style={{ backgroundColor: "#efefef" }}>
             <Container>
                 <Navbar.Brand>IsThereTachanunToday.com</Navbar.Brand>
-                <Nav className="me-auto">{...navElements}</Nav>
+                <Nav>{...navElements}</Nav>
             </Container>
         </Navbar>
     );

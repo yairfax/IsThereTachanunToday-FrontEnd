@@ -29,8 +29,8 @@ export const GDateSelector: React.FC<IProps> = ({ date, setDate }) => {
     return (
         <Container>
             <Form>
-                <Row className="align-items-center">
-                    <Form.Group className="col-auto" as={Col}>
+                <Row>
+                    <Form.Group as={Col}>
                         <Form.Control
                             type="date"
                             value={enteredDate.toISOString().slice(0, 10)}
@@ -38,7 +38,7 @@ export const GDateSelector: React.FC<IProps> = ({ date, setDate }) => {
                             onChange={handleUpdate}
                         />
                     </Form.Group>
-                    <Form.Group className="col-auto" as={Col}>
+                    <Form.Group xs={2} as={Col}>
                         <Button className="btn-primary" onClick={handleSubmit}>
                             Go!
                         </Button>

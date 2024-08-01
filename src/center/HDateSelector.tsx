@@ -68,15 +68,15 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
     return (
         <Container style={{ paddingTop: "10px" }}>
             <Form>
-                <Row class="align-items-center">
-                    <Form.Group className="col-md-2" as={Col}>
+                <Row>
+                    <Form.Group xs={3} as={Col}>
                         <FormControl
                             type="number"
                             required
                             value={enteredDate}
                             onChange={handleEnteredDate}></FormControl>
                     </Form.Group>
-                    <Form.Group className="col-md-3" as={Col}>
+                    <Form.Group xs as={Col}>
                         <Form.Select
                             required
                             value={enteredMonth}
@@ -88,14 +88,14 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
                             ))}
                         </Form.Select>
                     </Form.Group>
-                    <Form.Group className="col-auto" as={Col}>
+                    <Form.Group xs={3} as={Col}>
                         <FormControl
                             type="number"
                             required
                             value={enteredYear}
                             onChange={handleEnteredYear}></FormControl>
                     </Form.Group>
-                    <Form.Group className="col-auto" as={Col}>
+                    <Form.Group xs={2} as={Col}>
                         <Button className="btn-primary" onClick={handleSubmit}>
                             Go!
                         </Button>

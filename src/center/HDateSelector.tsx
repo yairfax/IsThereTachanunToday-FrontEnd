@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import { range } from "lodash";
 import { getMonthName, monthsInYear } from "@hebcal/hdate";
@@ -15,25 +16,8 @@ interface IProps {
 
 export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
     const [enteredDate, setEnteredDate] = React.useState(date.getDate());
-    const handleEnteredDate = React.useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) =>
-            setEnteredDate(parseInt(e.currentTarget.value, 10)),
-        [],
-    );
-
     const [enteredMonth, setEnteredMonth] = React.useState(date.getMonthName());
-    const handleEnteredMonth = React.useCallback(
-        (e: React.ChangeEvent<HTMLSelectElement>) =>
-            setEnteredMonth(e.currentTarget.value),
-        [],
-    );
-
     const [enteredYear, setEnteredYear] = React.useState(date.getFullYear());
-    const handleEnteredYear = React.useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) =>
-            setEnteredYear(parseInt(e.currentTarget.value, 10)),
-        [],
-    );
 
     React.useEffect(() => {
         setEnteredDate(date.getDate());
@@ -44,6 +28,30 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
     const enteredHDate = React.useMemo(
         (): HDate => new HDate(enteredDate, enteredMonth, enteredYear),
         [enteredDate, enteredMonth, enteredYear],
+    );
+
+    const handleEnteredDate = React.useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const date = parseInt(e.currentTarget.value, 10);
+            date > 0 &&
+                date <= enteredHDate.daysInMonth() &&
+                setEnteredDate(date);
+        },
+        [enteredHDate],
+    );
+
+    const handleEnteredMonth = React.useCallback(
+        (e: React.ChangeEvent<HTMLSelectElement>) =>
+            setEnteredMonth(e.currentTarget.value),
+        [],
+    );
+
+    const handleEnteredYear = React.useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const year = parseInt(e.currentTarget.value, 10);
+            year > 0 && setEnteredYear(year);
+        },
+        [],
     );
 
     const handleSubmit = React.useCallback(
@@ -58,17 +66,17 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
     }, [enteredYear]);
 
     return (
-        <Container style={{ padding: "10px" }}>
+        <Container style={{ paddingTop: "10px" }}>
             <Form>
                 <Row class="align-items-center">
-                    <Form.Group className="col-md-2">
+                    <Form.Group className="col-md-2" as={Col}>
                         <FormControl
                             type="number"
                             required
                             value={enteredDate}
                             onChange={handleEnteredDate}></FormControl>
                     </Form.Group>
-                    <Form.Group className="col-md-3">
+                    <Form.Group className="col-md-3" as={Col}>
                         <Form.Select
                             required
                             value={enteredMonth}
@@ -80,14 +88,14 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
                             ))}
                         </Form.Select>
                     </Form.Group>
-                    <Form.Group className="col-auto">
+                    <Form.Group className="col-auto" as={Col}>
                         <FormControl
                             type="number"
                             required
                             value={enteredYear}
                             onChange={handleEnteredYear}></FormControl>
                     </Form.Group>
-                    <Form.Group className="col-auto">
+                    <Form.Group className="col-auto" as={Col}>
                         <Button className="btn-primary" onClick={handleSubmit}>
                             Go!
                         </Button>

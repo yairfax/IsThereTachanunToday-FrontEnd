@@ -1,5 +1,6 @@
 import * as React from "react";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -29,7 +30,7 @@ export const GDateSelector: React.FC<IProps> = ({ date, setDate }) => {
         <Container>
             <Form>
                 <Row className="align-items-center">
-                    <Form.Group className="col-auto">
+                    <Form.Group className="col-auto" as={Col}>
                         <Form.Control
                             type="date"
                             value={enteredDate.toISOString().slice(0, 10)}
@@ -37,7 +38,7 @@ export const GDateSelector: React.FC<IProps> = ({ date, setDate }) => {
                             onChange={handleUpdate}
                         />
                     </Form.Group>
-                    <Form.Group className="col-auto">
+                    <Form.Group className="col-auto" as={Col}>
                         <Button className="btn-primary" onClick={handleSubmit}>
                             Go!
                         </Button>

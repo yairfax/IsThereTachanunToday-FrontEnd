@@ -18,11 +18,9 @@ function App() {
 
     const updateMode = React.useCallback(
         (mode: Mode) => {
-            const newParams = {
-                ...searchParams,
-                mode,
-            };
-            setSearchParams(newParams);
+            searchParams.delete("mode");
+            searchParams.append("mode", mode);
+            setSearchParams(searchParams);
         },
         [searchParams, setSearchParams],
     );
@@ -58,30 +56,24 @@ function App() {
 
     const setHDate = React.useCallback(
         (hDate: HDate) => {
-            const newParams = omit(
-                {
-                    ...searchParams,
-                    hDate: `${hDate.getFullYear()}-${hDate.getMonth()}-${hDate.getDate()}`,
-                },
-                "gDate",
+            searchParams.delete("gDate");
+            searchParams.delete("hDate");
+            searchParams.append(
+                "hDate",
+                `${hDate.getFullYear()}-${hDate.getMonth()}-${hDate.getDate()}`,
             );
-
-            setSearchParams(newParams);
+            setSearchParams(searchParams);
         },
         [searchParams, setSearchParams],
     );
 
     const setGDate = React.useCallback(
         (gDate: Date) => {
-            const newParams = omit(
-                {
-                    ...searchParams,
-                    gDate: gDate.toISOString().slice(0, 10),
-                },
-                "hDate",
-            );
+            searchParams.delete("gDate");
+            searchParams.delete("hDate");
+            searchParams.append("gDate", gDate.toISOString().slice(0, 10));
 
-            setSearchParams(newParams);
+            setSearchParams(searchParams);
         },
         [searchParams, setSearchParams],
     );

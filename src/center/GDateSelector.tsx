@@ -29,7 +29,7 @@ export const GDateSelector: React.FC<IProps> = ({ date, setDate }) => {
     return (
         <Container>
             <Form>
-                <Row>
+                <Row style={{ width: "100%" }}>
                     <Form.Group as={Col}>
                         <Form.Control
                             type="date"

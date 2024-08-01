@@ -8,6 +8,8 @@ import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import { range } from "lodash";
 import { getMonthName, monthsInYear } from "@hebcal/hdate";
+import Popover from "react-bootstrap/Popover";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 interface IProps {
     date: HDate;
@@ -65,36 +67,76 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
         );
     }, [enteredYear]);
 
+    const popover = React.useMemo(() => {
+        return (
+            <Popover id="popover-hdate">
+                <Popover.Body>
+                    <Container>
+                        <Form>
+                            <Row>
+                                <Form.Group as={Col}>
+                                    <FormControl
+                                        type="number"
+                                        required
+                                        value={enteredDate}
+                                        onChange={
+                                            handleEnteredDate
+                                        }></FormControl>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Select
+                                        required
+                                        value={enteredMonth}
+                                        onChange={handleEnteredMonth}>
+                                        {possibleMonths.map((m, i) => (
+                                            <option value={m} key={i}>
+                                                {m}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <FormControl
+                                        type="number"
+                                        required
+                                        value={enteredYear}
+                                        onChange={
+                                            handleEnteredYear
+                                        }></FormControl>
+                                </Form.Group>
+                            </Row>
+                        </Form>
+                    </Container>
+                </Popover.Body>
+            </Popover>
+        );
+    }, [
+        enteredDate,
+        enteredMonth,
+        enteredYear,
+        handleEnteredDate,
+        handleEnteredMonth,
+        handleEnteredYear,
+        possibleMonths,
+    ]);
+
     return (
         <Container style={{ paddingTop: "10px" }}>
             <Form>
-                <Row>
-                    <Form.Group xs={3} as={Col}>
-                        <FormControl
-                            type="number"
-                            required
-                            value={enteredDate}
-                            onChange={handleEnteredDate}></FormControl>
-                    </Form.Group>
-                    <Form.Group xs as={Col}>
-                        <Form.Select
-                            required
-                            value={enteredMonth}
-                            onChange={handleEnteredMonth}>
-                            {possibleMonths.map((m, i) => (
-                                <option value={m} key={i}>
-                                    {m}
-                                </option>
-                            ))}
-                        </Form.Select>
-                    </Form.Group>
-                    <Form.Group xs={3} as={Col}>
-                        <FormControl
-                            type="number"
-                            required
-                            value={enteredYear}
-                            onChange={handleEnteredYear}></FormControl>
-                    </Form.Group>
+                <Row style={{ width: "100%" }}>
+                    <OverlayTrigger
+                        trigger="click"
+                        placement="bottom"
+                        overlay={popover}>
+                        <Form.Group xs as={Col}>
+                            <FormControl
+                                type="text"
+                                required
+                                value={date.render()}
+                                onChange={handleEnteredYear}></FormControl>
+                        </Form.Group>
+                    </OverlayTrigger>
+
                     <Form.Group xs={2} as={Col}>
                         <Button className="btn-primary" onClick={handleSubmit}>
                             Go!

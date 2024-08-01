@@ -7,10 +7,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
     {
-        path:
-            document.baseURI === "yairfax.github.io"
-                ? "/IsThereTachanunToday-FrontEnd/"
-                : "/",
+        path: document.baseURI.includes("yairfax.github.io")
+            ? "/IsThereTachanunToday-FrontEnd/"
+            : "/",
         element: <App />,
     },
 ]);

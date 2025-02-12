@@ -23,7 +23,8 @@ export function noTachanun(
     const noTachanunDate = find(
         days,
         (day: IDay) =>
-            day.month === resolvedDate.getMonthName().toUpperCase() &&
+            day.month ===
+                resolvedDate.getMonthName().toUpperCase().replace("'", "") &&
             day.startDay <= dayOfMonth &&
             day.endDay >= dayOfMonth,
     );

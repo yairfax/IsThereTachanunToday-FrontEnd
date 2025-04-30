@@ -47,7 +47,7 @@ export const CenterCard: React.FC<IProps> = ({
                             No tachnun{" "}
                             {noTachanunResult.mincha
                                 ? "at Mincha because tomorrow, " +
-                                  hDate.render() +
+                                  hDate.add(1, "day").render() +
                                   ","
                                 : "today because " + hDate.render()}{" "}
                             is {noTachanunResult.description}.

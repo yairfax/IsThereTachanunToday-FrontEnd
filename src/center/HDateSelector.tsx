@@ -73,8 +73,8 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
                 <Popover.Body>
                     <Container>
                         <Form>
-                            <Row>
-                                <Form.Group as={Col}>
+                            <Col>
+                                <Form.Group as={Row}>
                                     <FormControl
                                         type="number"
                                         required
@@ -83,7 +83,7 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
                                             handleEnteredDate
                                         }></FormControl>
                                 </Form.Group>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Row}>
                                     <Form.Select
                                         required
                                         value={enteredMonth}
@@ -95,7 +95,7 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
                                         ))}
                                     </Form.Select>
                                 </Form.Group>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Row}>
                                     <FormControl
                                         type="number"
                                         required
@@ -104,7 +104,7 @@ export const HDateSelector: React.FC<IProps> = ({ date, setDate }) => {
                                             handleEnteredYear
                                         }></FormControl>
                                 </Form.Group>
-                            </Row>
+                            </Col>
                         </Form>
                     </Container>
                 </Popover.Body>

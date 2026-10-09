@@ -30,9 +30,7 @@ function App() {
         const embeddedHDate = searchParams.get("hDate");
 
         if (embeddedGDate) {
-            const offset = new Date().getTimezoneOffset() / 60;
             const resolvedGDate = new Date(embeddedGDate);
-            resolvedGDate.setHours(resolvedGDate.getHours() + offset);
 
             if (resolvedGDate.toString() != "Invalid Date") {
                 return [resolvedGDate, new HDate(resolvedGDate)];
@@ -48,7 +46,11 @@ function App() {
                     parseInt(year, 10),
                 );
 
-                return [resolvedHDate.greg(), resolvedHDate];
+                const offset = new Date().getTimezoneOffset() / 60;
+                const resolvedGDate = resolvedHDate.greg();
+                resolvedGDate.setHours(resolvedGDate.getHours() - offset);
+
+                return [resolvedGDate, resolvedHDate];
             }
         }
 
